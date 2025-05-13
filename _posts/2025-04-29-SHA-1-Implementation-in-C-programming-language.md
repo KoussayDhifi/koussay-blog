@@ -310,7 +310,7 @@ This will be a practical example of everything mentionned before.
 ### C project structure
 
 The structure of the C project will be the following:
-```s
+```
 SHA-1/
 ├── .gitignore              # Ignores object files, executable, and text files
 ├── Makefile                # Build configuration
