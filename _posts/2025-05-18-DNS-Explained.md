@@ -3,7 +3,7 @@ title: DNS Explained
 description: This article delves into the DNS protocol what is it  and how it works.
 author: Koussay Dhifi
 categories: [DNS, Networking, Information Gathering]
-tags: [DNS, Networking, DNS zone transfer]
+tags: [Networking, DNS]
 pin: true
 math: true
 mermaid: true
