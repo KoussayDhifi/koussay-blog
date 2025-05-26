@@ -7,6 +7,9 @@ tags: [DNS, Networking, DNS zone transfer]
 pin: true
 math: true
 mermaid: true
+image:
+  path: /assets/img/dns/www.google.com.png
+  alt: "Illustration explaining how DNS works"
 ---
 
 ## Introduction
@@ -141,7 +144,7 @@ The following is an example of an A record.
 |------|------|-------|--------------------|
 | example.com | A | 10.10.12.11 | 3600 |
 
-### AAAA record (Quand A record)
+### AAAA record (Quad A record)
 
 This record maps the domain name to an IPv6 address.
 
