@@ -7,9 +7,6 @@ tags: [DNS, Networking, DNS zone transfer]
 pin: true
 math: true
 mermaid: true
-image:
-  path: /assets/img/dns/www.google.com.png
-  alt: "Illustration explaining how DNS works"
 ---
 
 ## Introduction
