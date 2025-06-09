@@ -2,8 +2,8 @@
 title: DNS Explained
 description: This article delves into the DNS protocol what is it  and how it works.
 author: Koussay Dhifi
-categories: [DNS, Networking, Information Gathering]
-tags: [Networking, DNS]
+categories: [Networking, DNS, Information Gathering]
+tags: [Networking, DNS, DNS zone transfer]
 pin: true
 math: true
 mermaid: true
