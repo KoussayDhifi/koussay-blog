@@ -50,11 +50,11 @@ But we need more information about such port so let's invistigate it with the br
 
 So the app has a login form like the following.
 
-![WebMin_Form](../assets/img/sourceWriteup/webminOne.png)
+![WebMin Form](../assets/img/sourceWriteup/webminOne.png)
 
 And if we try to login with classic creds (admin, admin) we get.
 
-![WebMin_Form](../assets/img/sourceWriteup/LoginTrialWebMin.png)
+![WebMin Form](../assets/img/sourceWriteup/LoginTrialWebMin.png)
 
 **WebMin:**
 
