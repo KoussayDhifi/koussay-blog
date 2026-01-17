@@ -27,7 +27,7 @@ This section is about testing different inputs to find the XSS vulnerability.
 
 When we type something in the search bar we realise that it is sent to the server and reflected on the same page by typing `X search results for 'WhatYouTyped'`
 
-![Search Result](../assets/img/xssLabs/Lab1/ImageOne.png)
+![Search Result](../assets/img/xssLabs/Lab1/ImageTwo.png)
 
 and we can check it more within the url `/?search=article`. And to be more sure we can intercept the traffic using burpsuite and check the header and we find: `GET /?search=article HTTP/1.1`.
 
