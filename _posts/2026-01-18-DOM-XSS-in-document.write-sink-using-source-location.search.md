@@ -1,6 +1,6 @@
 ---
 title: DOM XSS in document.write sink using source location.search
-description: This writeup delves into the second XSS lab in port swigger.
+description: This writeup delves into the third XSS lab in port swigger.
 author: Koussay Dhifi
 categories: [Vulnerabilities, WebExploitation]
 tags: [WebExploitation, XSS, Labs]
