@@ -1,6 +1,6 @@
 ---
 title: Reflected XSS into a JavaScript string with angle brackets HTML encoded
-description: This writeup delves into the seventh XSS lab in port swigger.
+description: This writeup delves into the 9th XSS lab in port swigger.
 author: Koussay Dhifi
 categories: [Vulnerabilities, WebExploitation]
 tags: [WebExploitation, XSS, Labs]
