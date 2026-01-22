@@ -1,5 +1,5 @@
 ---
-title: Lab: Reflected XSS into HTML context with all tags blocked except custom ones
+title: Lab - Reflected XSS into HTML context with all tags blocked except custom ones
 description: This writeup delves into the 15th XSS lab in port swigger.
 author: Koussay Dhifi
 categories: [Vulnerabilities, WebExploitation]
