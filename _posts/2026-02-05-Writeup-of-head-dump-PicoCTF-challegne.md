@@ -1,5 +1,5 @@
 ---
-title: From Swagger to Secrets: Exploiting an Exposed Heap Dump
+title: From Swagger to Secrets- Exploiting an Exposed Heap Dump
 description: A writeup for the solution of the head-dump challenge in PicoCTF.
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
