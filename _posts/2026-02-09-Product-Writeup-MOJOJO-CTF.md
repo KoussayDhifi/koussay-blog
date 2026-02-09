@@ -254,11 +254,15 @@ def check_availability():
     try:
         conn = get_db()
         cursor = conn.cursor()
-        
+        #-------------------------SQL INJECTION IN THIS QUERY---------------------------------------------------
         query = f"SELECT pl.stock FROM products p JOIN product_locations pl ON p.id = pl.product_id JOIN locations l ON pl.location_id = l.id WHERE p.name = \"{product_name}\" AND l.city = ?"
 ```
 
 When we check the availability of a product we intercept the traffic and insert the product_name which is used unsafely here.
+
+![research](../assets/img/research.png)
+
+## Writing the Exploit
 
 After a lot of fuzzing, research and asking ChatGPT and Claude AI I stumbled into this set of conclusions:
 
