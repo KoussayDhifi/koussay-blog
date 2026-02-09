@@ -1,5 +1,5 @@
 ---
-title: Product Challenge Writeup MOJOJOJO CTF
+title: Product Challenge Writeup mojoJOJO CTF
 description: A writeup for the web exploitation challenge named products in MOJOJOJO CTF
 author: Koussay Dhifi
 categories: [Writeups, MOJOJOJO]
