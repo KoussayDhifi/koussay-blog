@@ -7,7 +7,7 @@ tags: [WebExploitation, CTFs, SQLI]
 pin: true
 math: true
 mermaid: true
-image: ../assets/img/mojojojo/mojoJOJO.jpg
+image: assets/img/mojojojo/mojoJOJO.jpg
 ---
 
 ## Introduction
