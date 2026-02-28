@@ -138,7 +138,7 @@ Welcome! Here’s a list of certifications I’ve earned over time, from partici
 <!-- International University Championship Participation -->
 <div class="col-12 col-md-6 col-lg-4 mb-4">
   <article class="card-wrapper card">
-    <a href="/assets/certs/IUDC7 Certificates - Debaters_01(241).pdf" class="post-preview row g-0 flex-md-row-reverse" target="_blank" rel="noopener">
+    <a href="/assets/certs/IUDC7.pdf" class="post-preview row g-0 flex-md-row-reverse" target="_blank" rel="noopener">
       <div class="col-12">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title my-2 mt-md-0">International University Championship Participation</h5>
