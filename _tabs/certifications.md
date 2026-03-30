@@ -31,6 +31,25 @@ Welcome! Here’s a list of certifications I’ve earned over time, from partici
   </article>
 </div>
 
+<div class="col-12 col-md-6 col-lg-4 mb-4">
+  <article class="card-wrapper card">
+    <a href="/assets/certs/IPROTECT_CTF.jpg" class="post-preview row g-0 flex-md-row-reverse" target="_blank" rel="noopener">
+      <div class="col-12">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title my-2 mt-md-0">I-PROTECT IEEE CTF Winner</h5>
+          <div class="card-text content mt-0 mb-3">
+            <p>Certificate of winning 1st place in a jeopardy CTF style.</p>
+          </div>
+          <div class="mt-auto">
+            <i class="fas fa-certificate fa-fw me-1"></i>
+            <span>View Certificate</span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </article>
+</div>
+
 <!-- CTF 102 Participation -->
 <div class="col-12 col-md-6 col-lg-4 mb-4">
   <article class="card-wrapper card">
