@@ -93,7 +93,7 @@ We found several interesting files and directories such as `ftp/`, `important.jp
 
 The `important.jpg` is an Among Us meme:
 
-![Important Image](/assets/img/startup/important.jpg)
+![Important Image](../assets/img/startup/important.jpg)
 
 The `notice.txt` contains:
 
