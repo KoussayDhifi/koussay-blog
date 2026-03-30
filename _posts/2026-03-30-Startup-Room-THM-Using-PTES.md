@@ -49,12 +49,6 @@ Usually, I like to start with passive information gathering like OSINT and DNS e
 `IP-ADDR startup.thm`
 
 
-
-
-
-
-
-
 ### Web App Check
 
 The web application returns the following page when accessed:
@@ -99,7 +93,7 @@ We found several interesting files and directories such as `ftp/`, `important.jp
 
 The `important.jpg` is an Among Us meme:
 
-![Important Image](../assets/img/startup/important.jpg)
+![Important Image](/assets/img/startup/important.jpg)
 
 The `notice.txt` contains:
 
@@ -233,7 +227,7 @@ cat /root/root.txt
 
 ## Reporting
 
-For the full report you can find it [here](https://koussaydhifi.org/assets/reports/SpiceHut_Report.pdf)
+For the full report you can find it (here)(https://koussaydhifi.org/assets/reports/SpiceHut_Report.pdf)
 
 ## Conclusion
 
