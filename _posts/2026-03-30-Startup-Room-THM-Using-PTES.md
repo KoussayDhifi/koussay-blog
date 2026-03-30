@@ -14,7 +14,7 @@ mermaid: true
 
 This is a boot2root machine within THM named ![startup](https://tryhackme.com/room/startup).
 
-If you want the report without seeing me struggle it is [here](../assets/reports/SpiceHut_Report.pdf)
+If you want the report without seeing me struggle it is ![here](../assets/reports/SpiceHut_Report.pdf)
 
 The theme of the challenge is the following:
 
@@ -59,7 +59,7 @@ Usually, I like to start with passive information gathering like OSINT and DNS e
 
 The web application returns the following page when accessed:
 
-![Web App](../assets/img/startup/lab22/Pasted%20image%20(1).png)
+![Web App](../assets/img/startup/Pasted%20image.png)
 
 The application appears not ready, so let's try to guess the tech stack using whatweb, which is a tool that identifies technologies used by web applications.
 
@@ -70,13 +70,13 @@ The application appears not ready, so let's try to guess the tech stack using wh
 ```sh
 $ whatweb 10.129.164.12
 http://10.129.164.12 [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], Email[#], HTML5, HTTPServer[Ubuntu Linux][Apache/2.4.18 (Ubuntu)], IP[10.129.164.12], Title[Maintenance]
-````
+```
 
 This gives us the version of the web server and the operating system.
 
 Even after using Wappalyzer (a Chrome extension for the same purpose), we get the same information:
 
-![Wappalyzer](../assets/img/startup/lab22/Pasted%20image%20\(2\).png)
+![Wappalyzer](../assets/img/startup/Pasted%20image%20(2).png)
 
 ---
 
@@ -93,13 +93,13 @@ Gobuster v3.6
 
 We found one path, which is `/files`, so let's check it:
 
-![Files Directory](../assets/img/startup/lab22/Pasted%20image%20\(3\).png)
+![Files Directory](../assets/img/startup/Pasted%20image%20(3).png)
 
 We found several interesting files and directories such as `ftp/`, `important.jpg`, and `notice.txt`.
 
 The `important.jpg` is an Among Us meme:
 
-![Important Image](../assets/img/startup/lab22/Pasted%20image%20\(4\).png)
+![Important Image](../assets/img/startup/important.jpg)
 
 The `notice.txt` contains:
 
@@ -111,7 +111,7 @@ This reveals a potential username: **Maya**.
 
 When we check the FTP directory, we find nothing uploaded:
 
-![FTP Directory](../assets/img/startup/lab22/Pasted%20image%20\(5\).png)
+![FTP Directory](../assets/img/startup/Pasted%20image%20(4).png)
 
 
 
@@ -171,7 +171,7 @@ The most valuable asset is FTP access, since we can upload a reverse shell and e
 
 We upload a PHP reverse shell:
 
-![Payload Upload](../assets/img/startup/lab22/Pasted%20image%20\(6\).png)
+![Payload Upload](../assets/img/startup/Pasted%20image%20(5).png)
 
 After triggering it and setting up a netcat listener:
 
@@ -221,7 +221,7 @@ gcc -shared PwnKit.c -o PwnKit -Wl,-e,entry -fPIC
 
 After running it, we gain root access:
 
-![Root Access](../assets/img/startup/lab22/Pasted%20image%20\(7\).png)
+![Root Access](../assets/img/startup/Pasted%20image%20(6).png)
 
 
 
@@ -233,7 +233,7 @@ cat /root/root.txt
 
 ## Reporting
 
-For the full report you can find it [here](../assets/reports/SpiceHut_Report.pdf)
+For the full report you can find it ![here](../assets/reports/SpiceHut_Report.pdf)
 
 ## Conclusion
 
