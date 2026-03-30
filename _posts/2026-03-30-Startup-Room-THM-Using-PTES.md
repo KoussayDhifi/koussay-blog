@@ -12,9 +12,9 @@ mermaid: true
 
 ## Introduction
 
-This is a boot2root machine within THM named ![startup](https://tryhackme.com/room/startup).
+This is a boot2root machine within THM named [startup](https://tryhackme.com/room/startup).
 
-If you want the report without seeing me struggle it is ![here](../assets/reports/SpiceHut_Report.pdf)
+If you want the report without seeing me struggle it is [here](https://koussaydhifi.org/assets/reports/SpiceHut_Report.pdf)
 
 The theme of the challenge is the following:
 
@@ -233,7 +233,7 @@ cat /root/root.txt
 
 ## Reporting
 
-For the full report you can find it ![here](../assets/reports/SpiceHut_Report.pdf)
+For the full report you can find it [here](https://koussaydhifi.org/assets/reports/SpiceHut_Report.pdf)
 
 ## Conclusion
 
