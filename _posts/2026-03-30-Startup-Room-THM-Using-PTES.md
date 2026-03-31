@@ -81,7 +81,27 @@ We use gobuster to enumerate directories of the web application to find exposed 
 ```sh
 ===============================================================
 Gobuster v3.6
-...
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.129.164.12
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /home/mohsen2/Downloads/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/.hta                 (Status: 403) [Size: 278]
+/.htaccess            (Status: 403) [Size: 278]
+/.htpasswd            (Status: 403) [Size: 278]
+/files                (Status: 301) [Size: 314] [--> http://10.129.164.12/files/]
+/index.html           (Status: 200) [Size: 808]
+/server-status        (Status: 403) [Size: 278]
+Progress: 4746 / 4747 (99.98%)
+===============================================================
+Finished
 ===============================================================
 ```
 
@@ -115,6 +135,24 @@ We use MSF with db_nmap:
 
 ```sh
 msf6 > db_nmap -sC -sV -O -T4 -A -p- -v 10.129.164.12
+
+Services
+========
+
+host           port  proto  name  state  info
+----           ----  -----  ----  -----  ----
+10.129.164.12  21    tcp    ftp   open   vsftpd 3.0.3
+10.129.164.12  22    tcp    ssh   open   OpenSSH 7.2p2 Ubuntu 4ubuntu2.10 Ubuntu Linux; protocol 2.0
+10.129.164.12  80    tcp    http  open   Apache httpd 2.4.18 (Ubuntu)
+
+msf6 > hosts
+
+Hosts
+=====
+
+address        mac  name         os_name  os_flavor  os_sp  purpose  info  comments
+-------        ---  ----         -------  ---------  -----  -------  ----  --------
+10.129.164.12       startup.thm  Linux               3.X    server
 ```
 
 We found:
