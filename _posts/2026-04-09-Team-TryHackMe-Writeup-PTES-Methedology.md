@@ -11,7 +11,7 @@ mermaid: true
 
 This is another writeup for an easy THM machine titled [Team](https://tryhackme.com/room/teamcw).
 
-We will be using the PTES methodology when performing this machine as a whole penetration test. To see the professional report you can click [here](../assets/reports/Team_Report.pdf).
+We will be using the PTES methodology when performing this machine as a whole penetration test. To see the professional report you can click [here](https://koussaydhifi.org/assets/reports/Team_Report.pdf).
 
 
 ## Pre Engagement
