@@ -29,13 +29,13 @@ Let's try to inject an inline script, `<script> alert() </script>`, to test the 
 
 After injecting it, we got the following error in the console.
 
-```http
+```
 Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-Oc0JZoBx+qLHE967sm4aPf8Z7Yv1qFQyTyC1k6qF3ro='), or a nonce ('nonce-...') is required to enable inline execution.
 ```
 
 So, as we can see, what we did was against the CSP. Let's try to send a HEAD request to know more about the CSP.
 
-```http
+```
 content-security-policy: default-src 'self'; object-src 'none';script-src 'self'; style-src 'self'; report-uri /csp-report?token=
 ```
 
@@ -47,7 +47,7 @@ If we check the endpoint `/csp-report?token=`, it takes us to a blank page and d
 
 If we go to the page `csp-report?token=hi` and check the CSP again via a HEAD request, we get:
 
-```http
+```
 content-security-policy: default-src 'self'; object-src 'none';script-src 'self'; style-src 'self'; report-uri /csp-report?token=hi
 ```
 
@@ -55,7 +55,7 @@ This means that the CSP is user-controlled, and thus we can add a new policy tha
 
 If we add only `?token=sss` to the origin and try to get the CSP, we get the following:
 
-```http
+```
 content-security-policy: default-src 'self'; object-src 'none';script-src 'self'; style-src 'self'; report-uri /csp-report?token=sss
 ```
 
