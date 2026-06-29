@@ -11,19 +11,19 @@ mermaid: true
 
 ## Introduction
 
-This lab focuses on a core UNION injection skill: determining how many columns the original query returns.
+This lab is all about one core UNION injection skill: figuring out how many columns the original query returns.
 
-The challenge is to find the right number of columns so that future UNION payloads will work.
+The challenge is to find the right number so later UNION payloads work.
 
 ## Recon
 
-The application is the same kind of e-commerce site as the earlier labs, with a vulnerable category parameter.
+The application is the same e-commerce site as the earlier labs, with a vulnerable category parameter.
 
 ![Lab 7 overview](../assets/sqli/lab7/7-1.png)
 
 ## Exploitation
 
-The method is simple: inject `NULL` values into a UNION query and add more until the error disappears.
+The method is simple: try UNION queries with different numbers of `NULL` values until the error disappears.
 
 Example payloads:
 
@@ -39,4 +39,4 @@ The point where the query stops failing tells us the number of columns returned 
 
 ## Conclusion
 
-This lab is fundamental because correct UNION attacks depend on matching the column count of the original query. Once you understand this, more advanced injection techniques become much easier.
+This lab is fundamental because UNION attacks depend on matching the column count. Once you understand that, the rest of the series gets much easier.

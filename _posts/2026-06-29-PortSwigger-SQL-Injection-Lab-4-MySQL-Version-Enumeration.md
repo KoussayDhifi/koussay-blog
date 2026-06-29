@@ -11,41 +11,39 @@ mermaid: true
 
 ## Introduction
 
-This lab is very similar to the Oracle version lab, but it targets MySQL or Microsoft SQL Server instead.
+This lab is basically the same idea as the Oracle version lab, but with MySQL syntax.
 
-The objective is to retrieve the database version string by exploiting the category filter.
+The objective is to retrieve the database version string using SQL injection on the category filter.
 
 ## Recon
 
-The application presents the same kind of catalog and category filter as in the earlier labs.
+The app looks like the previous labs, with a catalog and a category filter.
 
 ![Lab 4 overview](../assets/sqli/lab4/4-1.png)
 
 ## Exploitation
 
-We first confirm that the input is vulnerable by submitting a quote or a boolean-based payload.
-
-A payload such as:
+First we confirm the injection works with a boolean payload:
 
 ```sql
-' OR 1=1 -- 
+' OR 1=1 --
 ```
 
-is enough to confirm that the application is vulnerable to SQL injection.
+This is enough to show the parameter is injectable.
 
-Once that is confirmed, we use a UNION attack to reveal the database version. The MySQL query we want to trigger is:
+Once confirmed, we use a UNION-based payload to get the version. The MySQL server version is available via:
 
 ```sql
 SELECT @@version;
 ```
 
-So we craft a payload like:
+So the payload becomes:
 
 ```sql
-' UNION SELECT @@version, NULL -- 
+' UNION SELECT @@version, NULL --
 ```
 
-This returns the server version in the response, which solves the lab.
+That returns the server version in the page and solves the lab.
 
 ![Lab 4 payload](../assets/sqli/lab4/4-2.png)
 
@@ -53,4 +51,4 @@ This returns the server version in the response, which solves the lab.
 
 ## Conclusion
 
-This lab teaches the same core UNION injection technique as the Oracle version lab but with MySQL-specific syntax. The important idea is still the same: the injection must match the number and types of columns expected by the original query.
+This lab teaches the same UNION injection technique, but with MySQL-specific output. The key is still to match the expected columns and then grab the version string.

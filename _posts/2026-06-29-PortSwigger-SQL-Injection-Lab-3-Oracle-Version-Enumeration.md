@@ -11,50 +11,50 @@ mermaid: true
 
 ## Introduction
 
-This lab introduces UNION-based SQL injection. The challenge is to retrieve the Oracle database version string from the application.
+This lab introduces UNION-based SQL injection on Oracle. The goal is to retrieve the database version string.
 
-The vulnerable parameter is the category filter, and the application is similar to the earlier labs in the series.
+The vulnerable parameter is the category filter, and the app is similar to the earlier labs.
 
 ## Recon
 
-The site presents the usual product catalog and category selection interface. By interacting with the category filter, we can trigger the vulnerable request.
+The product catalog looks normal, but the category filter is the injection point.
 
 ![Lab 3 overview](../assets/sqli/lab3/3-1.png)
 
 ## Detecting the Vulnerability
 
-A single quote in the parameter can trigger an error, which is a strong sign that the input is being interpreted as SQL.
+Sending a single quote breaks the query and confirms SQL injection.
 
 ```text
 /filter?category=Accessories'
 ```
 
-This confirms that we are dealing with a SQL injection vector.
+This is a strong sign the input is interpreted as SQL.
 
 ![Lab 3 error](../assets/sqli/lab3/3-2.png)
 
 ## Exploitation
 
-Since Oracle requires a `FROM` clause in every `SELECT` statement, we can use the `dual` table when crafting our payload.
+Oracle requires a `FROM` clause even for simple selects, so we use the `dual` table.
 
-To determine how many columns the original query returns, we can try:
+First we find the number of columns with:
 
 ```sql
 ' UNION SELECT NULL FROM dual --
 ```
 
-and then add more `NULL` values until the query stops throwing an error.
+Then we add more `NULL` values until the error disappears.
 
-Once the column count is known, we can extract the version string with:
+Once the column count is known, we extract the version string with:
 
 ```sql
 ' UNION SELECT BANNER, NULL FROM v$version --
 ```
 
-That reveals the Oracle database version and solves the lab.
+That reveals the Oracle version and solves the lab.
 
 ![Lab 3 solved](../assets/sqli/lab3/3-3.png)
 
 ## Conclusion
 
-This lab is a good introduction to UNION injection on Oracle. It shows how to identify the number of columns and how Oracle-specific syntax affects the payload.
+This lab is a great intro to Oracle UNION injection. The main difference from other databases is the Oracle-specific syntax.
