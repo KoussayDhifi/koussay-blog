@@ -11,27 +11,27 @@ mermaid: true
 
 ## Introduction
 
-This is a medium web ctf challenge from picoCTF titled [No FA](https://learn.cylabacademy.org/library/765?category=1&page=1&difficulty=2).
+This is a medium web CTF challenge from PicoCTF titled [No FA](https://learn.cylabacademy.org/library/765?category=1&page=1&difficulty=2).
 
-It has the following description : **Seems like some data has been leaked! Can you get the flag?**
+It has the following description: **Seems like some data has been leaked! Can you get the flag?**
 
-This is my first medium picoCTF challenge let's try it.
+This is my first medium PicoCTF challenge, so let's try it.
 
 ## Recon
 
-We are provided with the backend code of the website alongsite a database and the actual website. First things firs we are going to do manual investigation and finish unknown pieces with the code so we can have a full picture.
+We are provided with the backend code of the website, along with a database and the actual website. First, we are going to do manual investigation and fill in the unknown pieces with the code so we can have a complete picture.
 
 ### Manual Investigation
 
-When we enter the website we get redirected to `/login` page that contains username field and password field with a login button as shown in the following image.
+When we enter the website, we are redirected to the `/login` page, which contains a username field, a password field, and a login button, as shown in the following image.
 
 ![No FA login page](../assets/pico/no-fa/no-fa-1.png)
 
-When I try to insert default creds like `admin:admin` I get an error message stating `Invalid username or password`.
+When I try to insert default credentials like `admin:admin`, I get an error message stating `Invalid username or password`.
 
-When I check the html code it is a normal form with a post request to `/login`. Now let's intercept the traffic with burpsuite before we check the provided code source to check more information.
+When I check the HTML code, it is a normal form with a POST request to `/login`. Now let's intercept the traffic with Burp Suite before we check the provided code source for more information.
 
-Basically the burp interception is normal nothing fishy there as shown.
+Basically, the Burp interception is normal and nothing fishy is going on, as shown.
 
 ```sh
 POST /login HTTP/1.1
@@ -51,27 +51,27 @@ Priority: u=0, i
 username=admin&password=admin&action=
 ```
 
-The data is sent in the format of `x-www-form-urlencoded`.
+The data is sent in the format `application/x-www-form-urlencoded`.
 
-Now basically we checked every manual thing let's see the code source.
+Now we have checked all the manual aspects; let's look at the code source.
 
 ### Code Source Investigation
 
-So after checking the code source we found that it is a normal website for logging in and there is ofcourse the flag in the admin account what is interesting is that some accounts are protected with some kind of '2fa' the problem with that 2fa is it stores the otp(**One Time Password**) not in the database but it does a bad practice I used to make in my early dev days -16 yo- where I store the confirmation number in the session in the user's browser :) ... So basically any guy who knows basic burp can get this number and bypass that useless '2fa'.
+After checking the code source, we found that it is a normal website for logging in, and, of course, the flag is in the admin account. What is interesting is that some accounts are protected with some kind of 2FA. The problem with that 2FA is that it stores the OTP (one-time password) not in the database, but it uses a bad practice that I used to use in my early dev days — storing the confirmation number in the session in the user's browser. So basically anyone with basic Burp knowledge can get this number and bypass the useless 2FA.
 
 ```py
 if user['two_fa']:
-                # Generate OTP
-                otp = str(random.randint(1000, 9999))
-                session['otp_secret'] = otp # Here the otp is stored in the session so we can retrieve it
-                session['otp_timestamp'] = time.time()
-                session['username'] = username
-                session['logged'] = 'false'
-                # send OTP to mail ---
-                return redirect(url_for('two_fa'))
+    # Generate OTP
+    otp = str(random.randint(1000, 9999))
+    session['otp_secret'] = otp  # Here the OTP is stored in the session, so we can retrieve it
+    session['otp_timestamp'] = time.time()
+    session['username'] = username
+    session['logged'] = 'false'
+    # send OTP to mail ---
+    return redirect(url_for('two_fa'))
 ```
 
-The problem here is where do we get the email and passwords the challenge provided us with the leaked database and after checking it we get the following.
+The problem is where we get the email and passwords. The challenge provided us with the leaked database, and after checking it, we get the following.
 
 ```sql
 sqlite> .tables
@@ -100,23 +100,23 @@ sqlite> select * from users
 20|joseph.cole|joseph.cole@nfa.com|49a57175de704a0ec2a006746d20d375814581bb3552ce0a0b13683426fd232|0
 ```
 
-What interests us here is the line 5 of the admin account actually it requires 2fa since its value is 1.
+What interests us here is line 5 of the admin account, which actually requires 2FA since its value is 1.
 
-What is remaining is guessing the admin's password now and since it is sha-256 it can be crackable in some cases and we are going to use my favourite website for this which is [https://crackstation.net/](https://crackstation.net/). It is the best one out there with ready wordlists and everything calculated for you so no need for johntheripper or hashcat.
+What remains is guessing the admin's password. Since it is SHA-256, it can be crackable in some cases, and we are going to use my favorite website for this, [https://crackstation.net/](https://crackstation.net/). It is the best one out there, with ready wordlists and everything already calculated for you, so there is no need for John the Ripper or Hashcat.
 
-After we insert the admin hash we actually get it and it is `apple@123` as shown in the following image.
+After we insert the admin hash, we actually get it, and it is `apple@123`, as shown in the following image.
 
 ![Cracked password](../assets/pico/no-fa/no-fa-2.png)
 
-Now we have everything ready let's open burp and get the otp.
+Now we have everything ready; let's open Burp and get the OTP.
 
 ## Exploitation
 
-After we log in as `admin:apple@123` we get redirected to the otp page.
+After we log in as `admin:apple@123`, we get redirected to the OTP page.
 
 ![OTP page](../assets/pico/no-fa/no-fa-3.png)
 
-and in burp we get the session encoded `.eJwty0sKgCAQANC7zFpixgI_lwnJSQR_qK2iu9ei7YN3Q6ohsAcLp0uDQUCdbR98dJ4fEm3mtxkzj-lyA0tKk0FUJJeVNKIUcA3uxWX-jvM5FnheKZwcFA.ajWlqA.Vd0J1VK4kzsMShCci8ZNIb9whW8` all we have to do is decode it now. We can use [https://www.kirsle.net/wizards/flask-session.cgi](https://www.kirsle.net/wizards/flask-session.cgi) and with that we get the full cookie session.
+In Burp, we get the session encoded `.eJwty0sKgCAQANC7zFpixgI_lwnJSQR_qK2iu9ei7YN3Q6ohsAcLp0uDQUCdbR98dJ4fEm3mtxkzj-lyA0tKk0FUJJeVNKIUcA3uxWX-jvM5FnheKZwcFA.ajWlqA.Vd0J1VK4kzsMShCci8ZNIb9whW8`. All we have to do is decode it now. We can use [https://www.kirsle.net/wizards/flask-session.cgi](https://www.kirsle.net/wizards/flask-session.cgi), and with that we get the full cookie session.
 
 ```json
 {
@@ -127,10 +127,10 @@ and in burp we get the session encoded `.eJwty0sKgCAQANC7zFpixgI_lwnJSQR_qK2iu9e
 }
 ```
 
-And with that we insert it before it expires and **kaboom** the lab is solved.
+And with that, we insert it before it expires, and the lab is solved.
 
 ![Solved lab](../assets/pico/no-fa/no-fa-4.png)
 
 ## Conclusion
 
-That was actually an easy one for a medium lab no exploitation actually just understanding the logic and checking cookie session.
+That was actually an easy one for a medium lab. There was no real exploitation; it was just understanding the logic and checking the cookie session.

