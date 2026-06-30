@@ -29,15 +29,15 @@ Sending a single quote breaks the query and confirms SQL injection.
 /filter?category=Accessories'
 ```
 
-This is a strong sign the input is interpreted as SQL.
+This is a strong sign that the input is interpreted as SQL.
 
 ![Lab 3 error](../assets/sqli/lab3/3-2.png)
 
 ## Exploitation
 
-Oracle requires a `FROM` clause even for simple selects, so we use the `dual` table.
+Oracle requires a `FROM` clause even for simple `SELECT` statements, so we use the `dual` table.
 
-First we find the number of columns with:
+First, we find the number of columns with:
 
 ```sql
 ' UNION SELECT NULL FROM dual --
@@ -57,4 +57,4 @@ That reveals the Oracle version and solves the lab.
 
 ## Conclusion
 
-This lab is a great intro to Oracle UNION injection. The main difference from other databases is the Oracle-specific syntax.
+This lab is a great introduction to Oracle UNION injection. The main difference from other databases is the Oracle-specific syntax.

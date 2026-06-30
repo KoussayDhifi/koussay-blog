@@ -41,10 +41,10 @@ So the query becomes effectively always true, which lets us authenticate.
 
 ![Lab 2 login bypass](../assets/sqli/lab2/2-2.png)
 
-Why not just use `admin' --`? Because if the admin user doesn’t exist, the query still fails. Using `OR '1'='1'` is safer and more reliable.
+Why not just use `admin' --`? Because if the admin user does not exist, the query still fails. Using `OR '1'='1'` is safer and more reliable.
 
 ![Lab 2 solved](../assets/sqli/lab2/2-3.png)
 
 ## Conclusion
 
-This lab is a straight-up example of login bypass via SQL injection. It shows how a tiny injection can turn an auth check into a universal pass.
+This lab is a straightforward example of login bypass via SQL injection. It shows how a small injection can turn an authentication check into a universal pass.

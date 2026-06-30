@@ -11,7 +11,7 @@ mermaid: true
 
 ## Introduction
 
-This is the first PortSwigger SQL injection lab. The goal is simple: retrieve hidden products by injecting into the category filter.
+This is the first PortSwigger SQL injection lab. The goal is to retrieve hidden products by injecting into the category filter.
 
 The vulnerable query is something like:
 
@@ -19,7 +19,7 @@ The vulnerable query is something like:
 SELECT * FROM products WHERE category = 'Gifts' AND released = 1;
 ```
 
-The site uses a category filter in the URL, so this is the perfect place to start with SQLi.
+The site uses a category filter in the URL, so this is a good place to start with SQLi.
 
 ## Recon
 
@@ -55,4 +55,4 @@ That makes the query return all products and solves the lab.
 
 ## Conclusion
 
-This lab is a beginner-friendly intro to SQL injection. It shows the classic trick of breaking out of a quoted string and turning a condition into always-true.
+This lab is a beginner-friendly introduction to SQL injection. It shows the classic trick of breaking out of a quoted string and turning a condition into an always-true one.

@@ -11,7 +11,7 @@ mermaid: true
 
 ## Introduction
 
-This lab teaches how to enumerate database contents on a non-Oracle database. The goal is to find the user credentials table and pull the values.
+This lab teaches how to enumerate database contents on a non-Oracle database. The goal is to find the user credentials table and retrieve the values.
 
 ## Recon
 
@@ -21,7 +21,7 @@ The app is the same e-commerce site with categories and a filter parameter. The 
 
 ## Exploitation
 
-First we confirm the injection with:
+First, we confirm the injection with:
 
 ```sql
 ' OR '1'='1' --
@@ -29,7 +29,7 @@ First we confirm the injection with:
 
 That returns products from all categories, so the parameter is injectable.
 
-Next we query the information schema with UNION:
+Next, we query the information schema with `UNION`:
 
 ```sql
 ' UNION SELECT table_name, NULL FROM information_schema.tables --
@@ -43,7 +43,7 @@ Then we inspect its columns:
 ' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name = 'users_olfmov' --
 ```
 
-Finally we retrieve the relevant values from that table and get the credentials needed to solve the lab.
+Finally, we retrieve the relevant values from that table and get the credentials needed to solve the lab.
 
 ![Lab 5 table enumeration](../assets/sqli/lab5/5-2.png)
 

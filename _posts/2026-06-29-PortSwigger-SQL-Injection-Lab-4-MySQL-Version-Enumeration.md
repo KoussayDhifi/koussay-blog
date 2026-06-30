@@ -23,13 +23,13 @@ The app looks like the previous labs, with a catalog and a category filter.
 
 ## Exploitation
 
-First we confirm the injection works with a boolean payload:
+First, we confirm that the injection works with a boolean payload:
 
 ```sql
 ' OR 1=1 --
 ```
 
-This is enough to show the parameter is injectable.
+This is enough to show that the parameter is injectable.
 
 Once confirmed, we use a UNION-based payload to get the version. The MySQL server version is available via:
 
@@ -51,4 +51,4 @@ That returns the server version in the page and solves the lab.
 
 ## Conclusion
 
-This lab teaches the same UNION injection technique, but with MySQL-specific output. The key is still to match the expected columns and then grab the version string.
+This lab teaches the same UNION injection technique, but with MySQL-specific output. The key is still to match the expected columns and then retrieve the version string.

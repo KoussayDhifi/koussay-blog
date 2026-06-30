@@ -13,7 +13,7 @@ mermaid: true
 
 This lab is all about one core UNION injection skill: figuring out how many columns the original query returns.
 
-The challenge is to find the right number so later UNION payloads work.
+The challenge is to find the right number so that later UNION payloads work.
 
 ## Recon
 
@@ -39,4 +39,4 @@ The point where the query stops failing tells us the number of columns returned 
 
 ## Conclusion
 
-This lab is fundamental because UNION attacks depend on matching the column count. Once you understand that, the rest of the series gets much easier.
+This lab is fundamental because UNION attacks depend on matching the column count. Once you understand that, the rest of the series becomes much easier.
