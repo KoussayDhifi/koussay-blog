@@ -4,8 +4,6 @@ description: A PortSwigger XSS lab writeup about reflected XSS with event handle
 author: Koussay Dhifi
 categories: [Vulnerabilities, WebExploitation]
 tags: [WebExploitation, XSS, PortSwigger, Labs]
-pin: true
-math: true
 mermaid: true
 ---
 

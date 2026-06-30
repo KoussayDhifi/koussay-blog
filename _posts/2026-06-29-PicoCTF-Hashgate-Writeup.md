@@ -4,8 +4,6 @@ description: A writeup of the PicoCTF Hashgate challenge, showing how to exploit
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, PicoCTF, IDOR, Enumeration]
-pin: false
-math: false
 mermaid: true
 ---
 

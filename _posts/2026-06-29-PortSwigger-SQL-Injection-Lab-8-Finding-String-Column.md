@@ -4,37 +4,50 @@ description: A writeup of PortSwigger's SQL injection lab for identifying the co
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
 tags: [WebExploitation, SQLInjection, PortSwigger, Labs, UNION]
-pin: false
-math: false
 mermaid: true
 ---
 
 ## Introduction
 
-This final lab teaches how to identify which column in a UNION query can display string values.
+This is the eighth SQLi lab titled [Finding a Column That Accepts Strings](https://portswigger.net/web-security/sql-injection/union-attacks/lab-find-column-containing-text).
 
-The goal is to locate the column that accepts a text payload like `AoyRql`.
+What we will try to do in this lab is a `UNION` attack to determine the number of columns returned by the first `SELECT` statement and which column has the string type.
 
 ## Recon
 
-The app is the usual vulnerable e-commerce site with a category filter.
+We are faced with the usual e-commerce website by PortSwigger, as shown in the following image.
+
+![Lab 8 overview](../assets/sqli/lab8/8-4.png)
+
+If we select a specific category, we get redirected to the URL `/filter?category=Accessories`.
+
+## Vuln Detection and Analysis
+
+If we try to add the payload `' OR '1'='1' -- `, we get all the items regardless of their category, which means that this is vulnerable to SQL injection.
 
 ![Lab 8 overview](../assets/sqli/lab8/8-1.png)
 
-## Exploitation
 
-After we know the number of columns, we test each one by replacing `NULL` values with a string literal.
+## Payload and Exploitation
 
-For example:
+First, we need to determine how many columns are being returned by the query that selects the category. We will add `' UNION SELECT NULL -- ` and keep adding `NULL` columns until no internal server error is shown.
 
-```sql
-' UNION SELECT 'AoyRql', NULL, NULL --
-```
-
-If the page displays the string, that column accepts string data.
+If we inject `' UNION SELECT NULL,NULL,NULL -- `, the error disappears and everything seems fine, as shown in the following image.
 
 ![Lab 8 solved](../assets/sqli/lab8/8-2.png)
 
+
+The string that we need to select is `'AoyRql'`. So let's now determine which column accepts a string type.
+
+Since we always mention this in almost every SQLi lab, the `UNION` clause requires two conditions:
+
+1. Each `SELECT` statement should have the same number of columns.
+2. Each column with the same index should have compatible types.
+
+So we try `' UNION SELECT 'AoyRql',NULL,NULL -- `. It did not work and gave us an internal server error. If we try `' UNION SELECT NULL,'AoyRql',NULL -- `, it is correct, and the lab is solved. Therefore, the second column is of the string type.
+
+![Lab 8 solved](../assets/sqli/lab8/8-3.png)
+
 ## Conclusion
 
-This lab finishes the series by showing a practical way to find the right string column for UNION payloads.
+That was a relatively easy lab. All the previous labs were for understanding `UNION` attacks more and how they work in general. The most important aspect is the two conditions that I mention in almost every post.

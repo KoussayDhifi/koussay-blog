@@ -4,50 +4,91 @@ description: A writeup of PortSwigger's SQL injection lab for retrieving the MyS
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
 tags: [WebExploitation, SQLInjection, PortSwigger, Labs, MySQL]
-pin: false
-math: false
 mermaid: true
 ---
 
 ## Introduction
 
-This lab is basically the same idea as the Oracle version lab, but with MySQL syntax.
+This is the fourth SQLi PortSwigger lab titled [SQL injection attack, querying the database type and version on MySQL and Microsoft](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-querying-database-version-mysql-microsoft).
 
-The objective is to retrieve the database version string using SQL injection on the category filter.
+The description of the lab is as follows:
+
+**This lab contains a SQL injection vulnerability in the product category filter. You can use a UNION attack to retrieve the results from an injected query. To solve the lab, display the database version string.**
 
 ## Recon
 
-The app looks like the previous labs, with a catalog and a category filter.
+First, we have the usual e-commerce website with its categories, as shown in the following image.
+
+![Lab 4 overview](../assets/sqli/lab4/4-6.png)
+
+If we select a specific category, we get redirected to the URL `/filter?category=Gifts`.
 
 ![Lab 4 overview](../assets/sqli/lab4/4-1.png)
 
-## Exploitation
+## Vulnerability Detection and Analysis
 
-First, we confirm that the injection works with a boolean payload:
+First of all, since there is a filter for the categories, we start by assuming the SQL query for this filter.
+
+Since we are sure about the condition we are filtering by, which is `category=Gifts`, we can assume this clause:
 
 ```sql
-' OR 1=1 --
+SELECT .* FROM ITEMS WHERE category='Gifts';
 ```
 
-This is enough to show that the parameter is injectable.
+We are also assuming the table name, but that is not the important part here. What is important is the condition: `WHERE category='Gifts'`.
 
-Once confirmed, we use a UNION-based payload to get the version. The MySQL server version is available via:
+Let's test whether the user input is treated safely by adding `'`.
+
+If we add `'` to the URL `/filter?category=Gifts'`, we get an internal server error.
+
+![Lab 4 overview](../assets/sqli/lab4/4-2.png)
+
+So the input is not treated safely, and there is a possibility that a SQL injection exists there. So let's try a more sophisticated payload: `' OR 1=1 --%20`. We added `%20` so it will add a space when decoded in the backend, since this is MySQL and a comment needs a space after it.
+
+And it worked perfectly fine.
+
+![Lab 4 overview](../assets/sqli/lab4/4-3.png)
+
+And thus SQL injection is confirmed, since the payload `' OR 1=1 --%20` worked perfectly fine.
+
+## Exploitation and Payload
+
+Since we are on MySQL, the way to show the version is:
 
 ```sql
 SELECT @@version;
 ```
 
-So the payload becomes:
+Now we need to craft a payload for this injection to show the version of the server.
+
+If we are going to use `UNION`, we need to verify the two usual constraints:
+
+1. Same number of columns
+2. Each column should have a compatible type with the corresponding one
+
+So it becomes:
 
 ```sql
-' UNION SELECT @@version, NULL --
+SELECT INT,FLOAT FROM X UNION SELECT INT, FLOAT FROM Y;
 ```
 
-That returns the server version in the page and solves the lab.
+Now we need to determine how many columns the base query returns by using the following method.
 
-![Lab 4 payload](../assets/sqli/lab4/4-2.png)
+In MySQL, you can select some ready values without a table, like `SELECT 'abc'`. That clause will return `abc` directly. The same goes for `SELECT NULL,NULL`, which will return `NULL,NULL`.
 
-![Lab 4 solved](../assets/sqli/lab4/4-3.png)
+What we will do is `SELECT 1,2,...n`; we keep adding columns in each request until there is no internal server error.
+
+If we test `/filter?category=Pets' UNION SELECT NULL,NULL --%20` (where `%20` is a space), we get a normal result.
+
+![Lab 4 overview](../assets/sqli/lab4/4-4.png)
+
+So we have 2 columns returned. Now we can write the final payload, which is `/filter?category=' UNION SELECT @@version,NULL --%20`. We removed `Pets` since we want only the version to be shown.
+
+The order of `NULL` and `@@version` does not matter, since both columns are shown on the website: one as the title of a table and the other as a `<th>`.
+
+The lab is solved, as shown.
+
+![Lab 4 overview](../assets/sqli/lab4/4-5.png)
 
 ## Conclusion
 

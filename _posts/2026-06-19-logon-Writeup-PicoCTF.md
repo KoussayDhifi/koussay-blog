@@ -4,8 +4,6 @@ description: A writeup for the picoCTF easy web challenge named logon.
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, CTFs, Cookies, Recon]
-pin: true
-math: false
 mermaid: true
 ---
 

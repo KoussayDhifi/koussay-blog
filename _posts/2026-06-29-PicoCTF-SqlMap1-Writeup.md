@@ -4,8 +4,6 @@ description: A writeup of the PicoCTF SqlMap1 challenge using SQL injection and 
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, PicoCTF, SQLInjection, SQLite]
-pin: false
-math: false
 mermaid: true
 ---
 

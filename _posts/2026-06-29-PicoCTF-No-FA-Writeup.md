@@ -4,8 +4,6 @@ description: A writeup of the PicoCTF No FA challenge with a 2FA session bypass 
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, PicoCTF, 2FA, SessionHijacking]
-pin: false
-math: false
 mermaid: true
 ---
 

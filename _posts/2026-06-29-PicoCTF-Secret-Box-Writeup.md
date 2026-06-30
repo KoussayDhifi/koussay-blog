@@ -4,8 +4,6 @@ description: A writeup of the PicoCTF Secret Box challenge using an INSERT SQL i
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, PicoCTF, SQLInjection, PostgreSQL]
-pin: false
-math: false
 mermaid: true
 ---
 

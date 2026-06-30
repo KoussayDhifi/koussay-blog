@@ -4,8 +4,6 @@ description: A detailed writeup of the PicoCTF "where are the robots" web exploi
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
 tags: [WebExploitation, PicoCTF, CTFs, Recon]
-pin: false
-math: true
 mermaid: true
 ---
 

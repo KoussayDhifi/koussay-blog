@@ -4,55 +4,46 @@ description: A writeup of PortSwigger's first SQL injection lab, showing how to 
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
 tags: [WebExploitation, SQLInjection, PortSwigger, Labs]
-pin: false
-math: false
 mermaid: true
 ---
 
 ## Introduction
 
-This is the first PortSwigger SQL injection lab. The goal is to retrieve hidden products by injecting into the category filter.
+This is the first SQLi lab within PortSwigger titled [SQL injection vulnerability in WHERE clause allowing retrieval of hidden data](https://portswigger.net/web-security/sql-injection/lab-retrieve-hidden-data).
 
-The vulnerable query is something like:
+It is a starting point for people to get used to SQLi vulnerabilities and exploitation.
+
+## Recon
+
+For this lab, we have the following e-commerce shopping website that contains four categories, as shown in the following image.
+
+![Lab 1 overview](../assets/sqli/lab1/1-2.png)
+
+When clicking on a category, it executes the following SQL clause.
 
 ```sql
 SELECT * FROM products WHERE category = 'Gifts' AND released = 1;
 ```
 
-The site uses a category filter in the URL, so this is a good place to start with SQLi.
+And our goal is to inject an SQL clause that lists both released and unreleased products.
 
-## Recon
+When we check the category, it goes to the following URL: `filter?category=Clothing%2c+shoes+and+accessories`. Basically, the injection will happen there in the variable `?category`.
 
-The app is a simple e-commerce site with a few categories. When we choose one, the browser sends a request like:
 
-```text
-/filter?category=Clothing%2c+shoes+and+accessories
+## Exploitation and Payload
+
+Since we are injecting in the category and want to list both released and unreleased products, we will write:
+
+```SQL
+SELECT * FROM products WHERE category = 'Clothing%2c+shoes+and+accessories' OR '1'='1' -- AND released=1';
 ```
 
-That category parameter looks very suspicious and is a strong candidate for injection.
+We will basically be injecting the following payload: `?category=Clothing,+shoes+and+accessories' OR '1' = '1' --`
 
-![Lab 1 overview](../assets/sqli/lab1/1-1.png)
+We will close the category string, and by adding `OR '1'='1'`, we will always have a `True` Boolean result. Since `released = 1` will be commented out, both released and unreleased products will be shown, and the lab will be solved.
 
-## Exploitation
-
-To bypass the `released = 1` condition and show both released and unreleased products, we use:
-
-```sql
-' OR '1'='1' --
-```
-
-This closes the original string, forces the condition to true, and comments out the rest.
-
-The payload becomes:
-
-```sql
-SELECT * FROM products WHERE category = 'Clothing, shoes and accessories' OR '1'='1' -- AND released = 1;
-```
-
-That makes the query return all products and solves the lab.
-
-![Lab 1 solved](../assets/sqli/lab1/1-2.png)
+![Lab 1 solved](../assets/sqli/lab1/1-1.png)
 
 ## Conclusion
 
-This lab is a beginner-friendly introduction to SQL injection. It shows the classic trick of breaking out of a quoted string and turning a condition into an always-true one.
+That was a nice and simple challenge for a basic introduction to SQLi. We used the famous payload `' OR '1'='1' --`.

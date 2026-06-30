@@ -4,8 +4,6 @@ description: A writeup for the PicoCTF easy web challenge named Insp3ct0r.
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, PicoCTF, CTFs, Recon, Enumeration]
-pin: true
-math: false
 mermaid: true
 ---
 

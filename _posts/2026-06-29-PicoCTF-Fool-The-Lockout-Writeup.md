@@ -4,8 +4,6 @@ description: A writeup of the PicoCTF Fool the Lockout challenge showing a flawe
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, PicoCTF, RateLimiting, LogicFlaw]
-pin: false
-math: false
 mermaid: true
 ---
 
