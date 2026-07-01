@@ -69,6 +69,8 @@ So we injected a valid payload and got the same page, and when we injected a mes
 
 So we need to extract the password. First, we need to use a UNION attack for this, but not our usual one, because this time we are just relying on the condition of the response containing the `welcome back` message.
 
+We will try a UNION attack first to see what happens if it works we continue xD. But usually blind sqli labs are solved using pure boolean based approaches by just adding a condition, I want to try the UNION method.
+
 If we inject `' UNION SELECT NULL -- `, we get the message `welcome back`, which means that the first SQL clause extracts one column, since UNION requires all SQL SELECT clauses to have the same number of columns with compatible types each (go back to previous labs—we milked this so much).
 
 Now we need to basically ask the database about the administrator's password in a clever way. First, we are going to ask it if the length is X or not, and we keep adding until we get that message in the response.
