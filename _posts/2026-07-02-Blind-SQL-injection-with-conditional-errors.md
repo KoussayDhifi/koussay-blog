@@ -1,6 +1,6 @@
 ---
 title: Blind SQL injection with conditional errors
-description: A writeup of PortSwigger's SQL injection lab for blind sqli based on conditional responses.
+description: A writeup of PortSwigger's SQL injection lab for blind sqli based on conditional errors.
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
 tags: [WebExploitation, SQLInjection, PortSwigger, Labs, UNION]
