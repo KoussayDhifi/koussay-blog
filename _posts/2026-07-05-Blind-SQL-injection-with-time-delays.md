@@ -1,5 +1,5 @@
 ---
-title: Blind SQL injection with time delays
+title: Blind SQL injection with time delays and Information retrieval
 description: A writeup of PortSwigger's SQL injection lab for blind sqli based on time delays.
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
@@ -9,7 +9,7 @@ mermaid: true
 
 ## Introduction
 
-This is another SQLi lab titled [Blind SQL injection with time delays](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays). This time, we are dealing with time-based SQLi. From what I've read and understood, time-based SQLi relies on your ability in recon, so you know how much time a DBMS would take if a condition is correct, and how much time it would take if it is false.
+This is another SQLi lab titled [Blind SQL injection with time delays](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays) And also this is a writeup for [ Blind SQL injection with time delays and information retrieval](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval). This time, we are dealing with time-based SQLi. From what I've read and understood, time-based SQLi relies on your ability in recon, so you know how much time a DBMS would take if a condition is correct, and how much time it would take if it is false.
 
 ## Recon
 
@@ -25,7 +25,7 @@ Cookie: TrackingId=x4W5yFPefX1xumuj; session=Uujnc9Vm1QIT0kEkA1senoZ9UnVvC2vd
 
 ## Vuln Detection and Analysis
 
-If we inject anything to try to cause an error, like `'` or other invalid SQL syntax, nothing happens. At first, it appears that there is no SQLi vulnerability here, but when we inject something with time delays, like `' AND EXISTS(SELECT 1 FROM pg_sleep(10)) -- `, we wait 10 seconds until the server returns a response for us... Guess what that means? Right, it's SQLi with time delays, and we can exploit this to extract sensitive data like the admin's password. If we inject just that sleep payload, the lab is solved, but I want something more entertaining — I want to extract the password by exploiting this time delay vulnerability.
+If we inject anything to try to cause an error, like `'` or other invalid SQL syntax, nothing happens. At first, it appears that there is no SQLi vulnerability here, but when we inject something with time delays, like `' AND EXISTS(SELECT 1 FROM pg_sleep(10)) -- `, we wait 10 seconds until the server returns a response for us... Guess what that means? Right, it's SQLi with time delays, and we can exploit this to extract sensitive data like the admin's password. If we inject just that sleep payload, the lab [Blind SQL injection with time delays](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays) is solved, and we move on to the next lab which is something more entertaining — We will be extracting the password by exploiting this time delay vulnerability.
 
 ## Exploitation and Payload
 
