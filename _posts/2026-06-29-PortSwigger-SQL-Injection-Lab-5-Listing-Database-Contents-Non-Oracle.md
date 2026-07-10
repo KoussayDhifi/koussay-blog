@@ -62,6 +62,13 @@ We need to select `username_cdwwco` and `password_thdszw` from the table `users_
 
 As shown in the following image, we find a list of all users in the database.
 
+![Lab 5 overview](../assets/sqli/lab5/5-3.png)
+
+Then, after we log in with the admin credentials,W we solve the lab.
+
+
+
+
 ## Conclusion
 
 This lab is a solid introduction to database enumeration using UNION injection. It shows how to move from a simple exploit to dumping stored usernames and passwords.
