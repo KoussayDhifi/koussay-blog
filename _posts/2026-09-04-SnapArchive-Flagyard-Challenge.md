@@ -120,7 +120,7 @@ files: [
 
 So if we check `http://Target/api/file/env.txt`, we can find the flag within the environment variables, as shown in the following snippet.
 
-```txt
+```
 TAR_ARCHIVE=/tmp/data/backups/rceeeesssssssseee.tar.gz
 DATA_DIR=/tmp/data
 TAR_FORMAT=gnu
