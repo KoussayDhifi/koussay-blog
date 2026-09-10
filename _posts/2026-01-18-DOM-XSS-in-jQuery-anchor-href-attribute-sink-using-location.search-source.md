@@ -4,7 +4,7 @@ description: This writeup delves into the fifth XSS lab in PortSwigger.
 author: Koussay Dhifi 
 categories: [Vulnerabilities, WebExploitation] 
 tags: [WebExploitation, XSS, Labs] 
-pin: true 
+pin: false
 math: true 
 mermaid: true 
 --- 

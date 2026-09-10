@@ -4,7 +4,7 @@ description: A PortSwigger XSS lab writeup about reflected XSS in a canonical li
 author: Koussay Dhifi
 categories: [Vulnerabilities, WebExploitation]
 tags: [WebExploitation, XSS, PortSwigger, Labs]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

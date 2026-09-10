@@ -4,7 +4,7 @@ description: A writeup for the picoCTF easy web challenge named Cookies.
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, CTFs, Cookies, BruteForce]
-pin: true
+pin: false
 math: false
 mermaid: true
 ---

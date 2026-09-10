@@ -4,7 +4,7 @@ description: This post delves into the low level aspect of SHA-1 hash function, 
 author: Koussay Dhifi
 categories: [Cryptography, Hash Functions, C Programming]
 tags: [Cryptography]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

@@ -4,7 +4,7 @@ description: A PortSwigger XSS lab writeup about bypassing a strict CSP by using
 author: Koussay Dhifi
 categories: [Vulnerabilities, WebExploitation]
 tags: [WebExploitation, XSS, CSP, PortSwigger, Labs]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

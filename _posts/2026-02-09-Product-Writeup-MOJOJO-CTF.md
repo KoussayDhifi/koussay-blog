@@ -4,7 +4,7 @@ description: A writeup for the web exploitation challenge named products in MOJO
 author: Koussay Dhifi
 categories: [Writeups, MOJOJOJO]
 tags: [WebExploitation, CTFs, SQLI]
-pin: true
+pin: false
 math: true
 mermaid: true
 image: ../assets/img/mojojojo/mojoJOJO.jpg

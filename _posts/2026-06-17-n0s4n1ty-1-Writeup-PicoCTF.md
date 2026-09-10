@@ -4,7 +4,7 @@ description: A writeup for the picoCTF easy web challenge named n0s4n1ty 1.
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, CTFs, FileUpload, PrivilegeEscalation, Linux]
-pin: true
+pin: false
 math: false
 mermaid: true
 ---

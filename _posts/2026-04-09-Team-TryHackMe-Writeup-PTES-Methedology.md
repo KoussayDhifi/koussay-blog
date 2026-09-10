@@ -2,7 +2,7 @@
 title: "Team - TryHackMe Writeup"
 author: Koussay Dhifi
 categories: [Vulnerabilities, WebExploitation]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

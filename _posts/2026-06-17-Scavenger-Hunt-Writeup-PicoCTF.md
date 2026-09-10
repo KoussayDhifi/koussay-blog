@@ -4,7 +4,7 @@ description: A writeup for the picoCTF easy web challenge named Scavenger Hunt.
 author: Koussay Dhifi
 categories: [Writeups, PicoCTF]
 tags: [WebExploitation, CTFs, Reconnaissance, Enumeration]
-pin: true
+pin: false
 math: false
 mermaid: true
 ---

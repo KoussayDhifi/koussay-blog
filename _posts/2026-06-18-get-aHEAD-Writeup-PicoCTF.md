@@ -4,7 +4,7 @@ description: A picoCTF web challenge writeup about using a HEAD request to retri
 author: Koussay Dhifi
 categories: [CTF, WebExploitation]
 tags: [WebExploitation, PicoCTF, HTTP, Recon]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

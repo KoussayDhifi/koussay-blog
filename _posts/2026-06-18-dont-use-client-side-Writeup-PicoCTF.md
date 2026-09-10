@@ -4,7 +4,7 @@ description: A picoCTF web challenge writeup about recovering a client-side chec
 author: Koussay Dhifi
 categories: [CTF, WebExploitation]
 tags: [WebExploitation, PicoCTF, JavaScript, ClientSide]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

@@ -4,7 +4,7 @@ description: This article delves into the DNS protocol what is it  and how it wo
 author: Koussay Dhifi
 categories: [Networking, DNS, Information Gathering]
 tags: [Networking, DNS, DNS zone transfer]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

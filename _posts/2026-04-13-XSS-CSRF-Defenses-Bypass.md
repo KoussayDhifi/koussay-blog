@@ -2,7 +2,7 @@
 title: "XSS To Bypass CSRF Defenses"
 author: Koussay Dhifi
 categories: [Vulnerabilities, WebExploitation]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

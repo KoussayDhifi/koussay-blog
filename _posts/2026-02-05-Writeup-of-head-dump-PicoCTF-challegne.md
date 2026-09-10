@@ -4,7 +4,7 @@ description: A writeup for the solution of the head-dump challenge in PicoCTF.
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
 tags: [WebExploitation, PicoCTF, CTFs, HEAD]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

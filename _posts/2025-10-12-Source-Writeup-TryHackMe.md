@@ -4,7 +4,7 @@ description: A writeup for the solution of the source room in THM.
 author: Koussay Dhifi
 categories: [Writeups, MSF, Webmin, CVEs, Pentesting]
 tags: [nmap, MSF, CVE-2019-15107]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

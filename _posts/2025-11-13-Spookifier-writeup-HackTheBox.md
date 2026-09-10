@@ -4,7 +4,7 @@ description: A writeup for the solution of the Spookifier challenge in HTB.
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
 tags: [WebExploitation, HackTheBox, CTFs, SSTI]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

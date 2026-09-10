@@ -4,7 +4,7 @@ description: A writeup for the solution of the Monster Cookie Secret Recipe chal
 author: Koussay Dhifi
 categories: [Writeups, WebExploitation]
 tags: [WebExploitation, PicoCTF, CTFs, HEAD]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

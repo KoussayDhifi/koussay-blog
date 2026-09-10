@@ -4,7 +4,7 @@ description: A complete walkthrough of the TryHackMe Startup machine, covering r
 author: Koussay Dhifi
 categories: [Cybersecurity, Penetration Testing]
 tags: [THM, Boot2Root, FTP, AnonymousLogin, ReverseShell, PCAP, PrivilegeEscalation, PwnKit, CVE-2021-4034, Linux]
-pin: true
+pin: false
 math: false
 mermaid: true
 ---
